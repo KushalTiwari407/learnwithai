@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Review Zone</title>
+    <style>
+        :root {
+            --neon-blue: #00ffff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(0, 255, 255, 0.1);
+        }
+    
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+    
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+    
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        nav a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+    
+        nav a:hover {
+            color: var(--neon-pink);
+        }
+    
+        .cyber-header {
+            height: 100vh;
+            background: 
+                linear-gradient(0deg, var(--dark-bg) 0%, transparent 100%),
+                linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 
+                2px 2px var(--neon-pink),
+                -2px -2px var(--neon-blue);
+            animation: glitch 1s infinite;
+        }
+    
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+            25% { text-shadow: -2px 2px var(--neon-blue), 2px -2px var(--neon-pink); }
+            50% { text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
+            75% { text-shadow: -2px -2px var(--neon-blue), 2px 2px var(--neon-pink); }
+            100% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+        }
+    
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+    
+        .cta-button:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+    
+        .section-heading {
+            font-size: 2rem;
+            color: var(--neon-pink);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+    
+        .reviews-grid, .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+    
+        .review-box, .news-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+    
+        .review-box:hover, .news-card:hover {
+            transform: translateY(-5px);
+        }
+    
+        .review-box img, .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+    
+        .review-rating {
+            color: var(--neon-pink);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        .read-more:hover {
+            color: var(--neon-pink);
+        }
+    
+        .about {
+            padding: 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+    
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+    
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    
+        footer p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">REVIEW NERDS</div>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="map.html">Gaming</a></li>
+              <li><a href="movie 1.html">Movies</a></li>
+              <li><a href="tech 1.html">Tech</a></li>
+              <li><a href="fourm 1.html">Chat Forum</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="cyber-header" id="home">
+        <div class="glitch-text">Tech Zone</div><br>
+    </section>
+
+    <!-- Tech Reviews Section -->
+    <section class="tech-reviews" id="tech-reviews">
+        <h2 class="section-heading">📱 Tech Reviews</h2>
+        <div class="reviews-grid">
+            <!-- Review 1 -->
+            <div class="review-box">
+                <img src="https://th.bing.com/th/id/OIP.azIej7bJLFwzUlD5Mb939gHaEK?rs=1&pid=ImgDetMain" alt="iPhone 16 Pro Review">
+                <h3>iPhone 16 Pro Review</h3>
+                <p>The iPhone 16 Pro offers a stunning display, improved camera, and blazing-fast performance. Is it worth the upgrade?</p>
+                <div class="review-rating">⭐ 4.7/5</div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-box">
+                <img src="https://th.bing.com/th/id/OIP.X5fjp_FXFzGFZaq9EDTVnAHaEk?rs=1&pid=ImgDetMain" alt="Samsung Galaxy Z Fold 5 Review">
+                <h3>Samsung Galaxy Z Fold 5 Review</h3>
+                <p>The Galaxy Z Fold 5 is a foldable powerhouse, but does it justify its premium price tag?</p>
+                <div class="review-rating">⭐ 4.5/5</div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-box">
+                <img src="https://www.notebookcheck.net/fileadmin/Notebooks/Apple/MacBook_Pro_14_2023_M3/IMG_1034.JPG" alt="MacBook Air M3 Review">
+                <h3>MacBook Air M3 Review</h3>
+                <p>Apple's MacBook Air M3 is thin, light, and incredibly powerful. A perfect laptop for professionals.</p>
+                <div class="review-rating">⭐ 4.8/5</div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="review-box">
+                <img src="https://static1.pocketnowimages.com/wordpress/wp-content/uploads/styles/xxlarge/public/2022-05/Featured%20Image%20Sony%20WH%201000%20XM5.jpg" alt="Sony WH-1000XM5 Review">
+                <h3>Sony WH-1000XM5 Review</h3>
+                <p>The Sony WH-1000XM5 headphones offer top-notch noise cancellation and sound quality. A must-have for audiophiles.</p>
+                <div class="review-rating">⭐ 4.9/5</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech News Section -->
+    <section class="tech-news" id="tech-news">
+        <h2 class="section-heading">📰 Latest Tech News</h2>
+        <div class="news-grid">
+            <!-- News 1 -->
+            <div class="news-card">
+                <img src="https://th.bing.com/th/id/OIP.jTBqDX8yyedHQemLR4WUYgHaEK?rs=1&pid=ImgDetMain" alt="AI Breakthrough">
+                <h3>AI Breakthrough: GPT-5 Announced</h3>
+                <p>OpenAI has announced GPT-5, the next generation of AI language models, promising even more advanced capabilities.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <!-- News 2 -->
+            <div class="news-card">
+                <img src="https://media.wired.co.uk/photos/606da2e35b10d6006e4b21a2/1:1/w_2000,h_2000,c_limit/quantum-computing-hero.jpg" alt="Quantum Computing">
+                <h3>Quantum Computing: The Future is Here</h3>
+                <p>IBM unveils its latest quantum processor, claiming a major leap in computational power.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <!-- News 3 -->
+            <div class="news-card">
+                <img src="https://th.bing.com/th/id/R.e734787e395599a64d7ab4d01a9edefb?rik=kwVqeHN9BbLIkQ&riu=http%3a%2f%2fwww.bellenews.com%2fwp-content%2fuploads%2f2015%2f09%2fTesla-Model-X-2015.jpg&ehk=tBqqXK4ooQWqHUi52t7PzrrB7%2fMBS730anWs0x1AXtQ%3d&risl=&pid=ImgRaw&r=0" alt="Electric Vehicles">
+                <h3>Tesla Announces New Electric SUV</h3>
+                <p>Tesla's new electric SUV promises a range of 500 miles and autonomous driving capabilities.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <!-- News 4 -->
+            <div class="news-card">
+                <img src="https://th.bing.com/th/id/R.950b20f9965b807487bab5bd0a4bdd41?rik=Rr29X7Q44%2fZFug&pid=ImgRaw&r=0" alt="5G Expansion">
+                <h3>5G Expansion: What It Means for You</h3>
+                <p>Major telecom companies are rolling out 5G networks nationwide, promising faster speeds and better connectivity.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-heading">About Tech Review Zone</h2>
+        <p>Welcome to Tech Review Zone, your go-to destination for the latest tech reviews, news, and insights. Our mission is to provide you with in-depth analysis and up-to-date information on the most exciting developments in the world of technology.</p>
+        <p>Whether you're a tech enthusiast, a professional, or just curious about the latest gadgets, we've got you covered. Stay tuned for regular updates and expert opinions!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2023 Tech Review Zone - All rights reserved</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Zone</title>
+       <style>
+    :root {
+        --neon-pink: #ff00ff;
+        --neon-blue: #00ffff;
+        --dark-bg: #0a0a0a;
+        --grid-color: rgba(0, 255, 255, 0.1);
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--dark-bg);
+        color: #fff;
+        font-family: 'Rajdhani', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Navigation Styles */
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav a {
+        color: var(--neon-blue);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    nav a:hover {
+        color: var(--neon-pink);
+    }
+
+    /* Hero Section */
+    .cyber-header {
+        height: 100vh;
+        background: 
+            linear-gradient(0deg, var(--dark-bg) 0%, transparent 100%),
+            linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-blue) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .glitch-text {
+        font-size: 4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: 
+            2px 2px var(--neon-pink),
+            -2px -2px var(--neon-blue);
+        animation: glitch 1s infinite;
+        margin-bottom: 1rem;
+    }
+
+    @keyframes glitch {
+        0% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+        25% { text-shadow: -2px 2px var(--neon-blue), 2px -2px var(--neon-pink); }
+        50% { text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
+        75% { text-shadow: -2px -2px var(--neon-blue), 2px 2px var(--neon-pink); }
+        100% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+    }
+
+    /* Movie Grid Styles */
+    .movie-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+
+    .movie-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--neon-blue);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+    .movie-box:hover {
+        transform: translateY(-5px);
+    }
+
+    .movie-box img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+
+    /* Reviews Section */
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 4rem 0;
+    }
+
+    .review-box {
+        background: rgba(0, 255, 255, 0.1);
+        padding: 2rem;
+        border: 1px solid var(--neon-blue);
+    }
+
+    .review-box h3 {
+        color: var(--neon-pink);
+        margin-bottom: 1rem;
+    }
+
+    .review-box p {
+        color: #fff;
+        font-size: 0.9rem;
+    }
+
+    .review-rating {
+        color: var(--neon-pink);
+        font-weight: bold;
+        margin-top: 1rem;
+    }
+
+    /* Marquee Styles */
+    .marquee-container {
+        margin: 3rem 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .marquee-heading {
+        font-size: 1.5rem;
+        color: var(--neon-pink);
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+    }
+
+    .movie-scroll {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .movie-card {
+        display: inline-block;
+        width: 250px;
+        margin: 0 1.5rem;
+        vertical-align: top;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--neon-blue);
+        transition: transform 0.3s;
+    }
+
+    .movie-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .movie-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-bottom: 2px solid var(--neon-pink);
+    }
+
+    .movie-info {
+        padding: 1rem;
+    }
+
+    .movie-title {
+        color: var(--neon-blue);
+        margin: 0.5rem 0;
+    }
+
+    .movie-genre {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .movie-rating {
+        color: var(--neon-pink);
+        margin-top: 0.5rem;
+    }
+
+    /* All-Time Favorites Section */
+    .all-time-favorites {
+        margin: 4rem 0;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--neon-blue);
+    }
+
+    .section-heading {
+        font-size: 2rem;
+        color: var(--neon-pink);
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .favorites-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .favorites-list li {
+        padding: 1rem;
+        margin: 0.5rem 0;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--neon-blue);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .favorites-list li:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(10px);
+        border-color: var(--neon-pink);
+    }
+
+    .movie-rank {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--neon-blue);
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .movie-name {
+        font-size: 1.1rem;
+        color: #fff;
+        flex-grow: 1;
+    }
+
+    .movie-genre {
+        font-size: 0.9rem;
+        color: var(--neon-pink);
+        background: rgba(255, 0, 255, 0.1);
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
+
+    /* Top Performing Movies Section */
+    .top-performing-all-time {
+        margin: 4rem 0;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--neon-blue);
+    }
+
+    .performance-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .performance-list li {
+        padding: 1rem;
+        margin: 0.5rem 0;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--neon-blue);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .performance-list li:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(10px);
+        border-color: var(--neon-pink);
+    }
+
+    .movie-metric {
+        font-size: 0.9rem;
+        color: var(--neon-pink);
+        background: rgba(255, 0, 255, 0.1);
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
+
+    /* Footer Styles */
+    footer {
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid var(--neon-blue);
+        margin-top: 4rem;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">REVIEW NERDS</div>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="map.html">Gaming</a></li>
+              <li><a href="movie 1.html">Movies</a></li>
+              <li><a href="tech 1.html">Tech</a></li>
+              <li><a href="fourm 1.html">Chat Forum</a></li>
+              <li><a href="#signup">Sign Up</a></li>
+            </ul>
+          </nav>
+    </header>
+    <section class="cyber-header" id="home">
+        <div class="glitch-text">Movie Zone</div><br>
+    </section>
+    <main class="container">
+        <!-- Trending Movies Marquee -->
+        <div class="marquee-container">
+            <h2 class="marquee-heading">🔥 TRENDING NOW</h2>
+            <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.setAttribute('scrollamount', 0.1)" onmouseout="this.setAttribute('scrollamount', 5)" loop="-1">
+                <div class="movie-scroll">
+                    <!-- Trending Movie 1 -->
+                    <div class="movie-card">
+                        <img src="https://th.bing.com/th/id/R.be7248985232d46128041023c99fad7d?rik=m%2fYm13OWgvgEMQ&riu=http%3a%2f%2fwww.nolanfans.com%2fimages%2fposters%2finception%2fp4xfull.jpg&ehk=fTBnrxgKiU4dJQxZMWXrFmdjr5dpguBG6osjjkLxxPA%3d&risl=1&pid=ImgRaw&r=0" alt="Movie 1">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Inception</h3>
+                            <p class="movie-genre">Sci-Fi • Thriller</p>
+                            <div class="movie-rating">⭐ 4.8/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Trending Movie 2 -->
+                    <div class="movie-card">
+                        <img src="https://th.bing.com/th/id/OIP.NN9rKH-vZbFgtH4FuoW7OwHaLH?rs=1&pid=ImgDetMain" alt="Movie 2">
+                        <div class="movie-info">
+                            <h3 class="movie-title">The Dark Knight</h3>
+                            <p class="movie-genre">Action • Crime</p>
+                            <div class="movie-rating">⭐ 4.9/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Add 8 more trending movies -->
+                    <div class="movie-card">
+                        <img src="https://www.themoviedb.org/t/p/original/nCbkOyOMTEwlEV0LtCOvCnwEONA.jpg" alt="Movie 3">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Interstellar</h3>
+                            <p class="movie-genre">Sci-Fi • Adventure</p>
+                            <div class="movie-rating">⭐ 4.7/5</div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <img src="https://is4-ssl.mzstatic.com/image/thumb/Video113/v4/80/72/4c/80724cd8-92a9-9f31-f9de-527fd18c8012/pr_source.lsr/900x900bb.jpg" alt="Movie 4">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Parasite</h3>
+                            <p class="movie-genre">Thriller • Drama</p>
+                            <div class="movie-rating">⭐ 4.6/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Continue adding remaining trending movies... -->
+                </div>
+            </marquee>
+        </div>
+
+        <!-- Latest Releases Marquee -->
+        <div class="marquee-container">
+            <h2 class="marquee-heading">🆕 LATEST RELEASES</h2>
+            <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.setAttribute('scrollamount', 0.5)" onmouseout="this.setAttribute('scrollamount', 5)" loop="-1">
+                <div class="movie-scroll">
+                    <!-- Latest Movie 1 -->
+                    <div class="movie-card">
+                        <img src="https://www.dvdsreleasedates.com/posters/800/D/Dune-Part-Two-2023-movie-poster.jpg" alt="Movie 5">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Dune: Part Two</h3>
+                            <p class="movie-genre">Sci-Fi • Adventure</p>
+                            <div class="movie-rating">⭐ 4.7/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Movie 2 -->
+                    <div class="movie-card">
+                        <img src="https://th.bing.com/th/id/OIP.f8IdbtmN_XwqqI2UROw44AHaK-?rs=1&pid=ImgDetMain" alt="Movie 6">
+                        <div class="movie-info">
+                            <h3 class="movie-title">The Batman</h3>
+                            <p class="movie-genre">Action • Crime</p>
+                            <div class="movie-rating">⭐ 4.8/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Add 8 more latest movies -->
+                    <div class="movie-card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg" alt="Movie 7">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Top Gun: Maverick</h3>
+                            <p class="movie-genre">Action • Drama</p>
+                            <div class="movie-rating">⭐ 4.9/5</div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <img src="https://i.pinimg.com/originals/3e/4b/ca/3e4bcac3c4352f07eda2a0fe784384b7.jpg" alt="Movie 8">
+                        <div class="movie-info">
+                            <h3 class="movie-title">Everything Everywhere<br>All at Once</h3>
+                            <p class="movie-genre">Sci-Fi • Comedy</p>
+                            <div class="movie-rating">⭐ 4.7/5</div>
+                        </div>
+                    </div>
+
+                    <!-- Continue adding remaining latest movies... -->
+                </div>
+            </marquee>
+        </div>
+
+        <!-- All-Time Favorites Section -->
+        <section class="all-time-favorites">
+            <h2 class="section-heading">🌟 ALL-TIME FAVORITES</h2>
+            <div class="favorites-container">
+                <ul class="favorites-list">
+                    <li>
+                        <span class="movie-rank">1</span>
+                        <span class="movie-name">The Shawshank Redemption</span>
+                        <span class="movie-genre">Drama</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">2</span>
+                        <span class="movie-name">The Godfather</span>
+                        <span class="movie-genre">Crime • Drama</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">3</span>
+                        <span class="movie-name">The Dark Knight</span>
+                        <span class="movie-genre">Action • Crime</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">4</span>
+                        <span class="movie-name">Pulp Fiction</span>
+                        <span class="movie-genre">Crime • Drama</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">5</span>
+                        <span class="movie-name">Forrest Gump</span>
+                        <span class="movie-genre">Drama • Romance</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">6</span>
+                        <span class="movie-name">Inception</span>
+                        <span class="movie-genre">Sci-Fi • Thriller</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">7</span>
+                        <span class="movie-name">The Lord of the Rings: The Return of the King</span>
+                        <span class="movie-genre">Adventure • Fantasy</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">8</span>
+                        <span class="movie-name">Fight Club</span>
+                        <span class="movie-genre">Drama</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">9</span>
+                        <span class="movie-name">The Matrix</span>
+                        <span class="movie-genre">Sci-Fi • Action</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">10</span>
+                        <span class="movie-name">Goodfellas</span>
+                        <span class="movie-genre">Crime • Drama</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Top Performing Movies of All Time Section -->
+        <section class="top-performing-all-time">
+            <h2 class="section-heading">🏆 TOP PERFORMING MOVIES OF ALL TIME</h2>
+            <div class="performance-container">
+                <ul class="performance-list">
+                    <li>
+                        <span class="movie-rank">1</span>
+                        <span class="movie-name">Avatar</span>
+                        <span class="movie-metric">⭐ 7.8/10 • $2.8B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">2</span>
+                        <span class="movie-name">Avengers: Endgame</span>
+                        <span class="movie-metric">⭐ 8.4/10 • $2.79B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">3</span>
+                        <span class="movie-name">Titanic</span>
+                        <span class="movie-metric">⭐ 7.8/10 • $2.2B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">4</span>
+                        <span class="movie-name">Star Wars: The Force Awakens</span>
+                        <span class="movie-metric">⭐ 7.9/10 • $2.07B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">5</span>
+                        <span class="movie-name">Avengers: Infinity War</span>
+                        <span class="movie-metric">⭐ 8.4/10 • $2.04B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">6</span>
+                        <span class="movie-name">Jurassic World</span>
+                        <span class="movie-metric">⭐ 7/10 • $1.67B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">7</span>
+                        <span class="movie-name">The Lion King (2019)</span>
+                        <span class="movie-metric">⭐ 6.9/10 • $1.66B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">8</span>
+                        <span class="movie-name">The Avengers</span>
+                        <span class="movie-metric">⭐ 8/10 • $1.52B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">9</span>
+                        <span class="movie-name">Furious 7</span>
+                        <span class="movie-metric">⭐ 7.1/10 • $1.51B+ Box Office</span>
+                    </li>
+                    <li>
+                        <span class="movie-rank">10</span>
+                        <span class="movie-name">Frozen II</span>
+                        <span class="movie-metric">⭐ 6.8/10 • $1.45B+ Box Office</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="reviews" id="reviews">
+            <h2>📝 Movie Reviews</h2>
+            <div class="reviews-grid">
+                <div class="review-box">
+                    <h3>Inception</h3>
+                    <p>"A mind-bending journey through dreams and reality. Christopher Nolan delivers a masterpiece that keeps you on the edge of your seat."</p>
+                    <div class="review-rating">⭐ 4.8/5</div>
+                </div>
+                <div class="review-box">
+                    <h3>The Dark Knight</h3>
+                    <p>"Heath Ledger's Joker is iconic. A dark, gripping tale of chaos and heroism that redefined the superhero genre."</p>
+                    <div class="review-rating">⭐ 4.9/5</div>
+                </div>
+                <div class="review-box">
+                    <h3>Interstellar</h3>
+                    <p>"A visually stunning and emotionally powerful exploration of space, time, and human connection."</p>
+                    <div class="review-rating">⭐ 4.7/5</div>
+                </div>
+                <div class="review-box">
+                    <h3>Parasite</h3>
+                    <p>"A brilliant social commentary wrapped in a thrilling and unpredictable narrative. A must-watch."</p>
+                    <div class="review-rating">⭐ 4.6/5</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 Movie Review Zone - All rights reserved</p>
+        <p>Powered by CinemaCore Engine</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,188 @@
+/* Cyberpunk Theme Styles */
+:root {
+  --neon-blue: #00ffff;
+  --neon-pink: #ff00ff;
+  --dark-bg: #0a0a0a;
+  --grid-color: rgba(0, 255, 255, 0.1);
+  --text-color: #fff;
+  --accent-color: #e74c3c;
+}
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  line-height: 1.6;
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid var(--neon-blue);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--neon-pink);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--neon-pink);
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  padding: 6rem 2rem 2rem;
+  background: linear-gradient(0deg, var(--dark-bg) 0%, transparent 100%),
+              linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-blue) 100%);
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+/* Main Content */
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.about, .social, .request {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--neon-blue);
+  padding: 2rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about:hover, .social:hover, .request:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px var(--neon-pink);
+}
+
+.about h2, .social h2, .request h2 {
+  font-size: 1.8rem;
+  color: var(--neon-pink);
+  margin-bottom: 1rem;
+}
+
+.about p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.icon {
+  color: var(--neon-blue);
+  font-size: 2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+  color: var(--neon-pink);
+}
+
+/* Request Form */
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.request-form input, .request-form textarea {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--neon-blue);
+  border-radius: 5px;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.request-form input:focus, .request-form textarea:focus {
+  border-color: var(--neon-pink);
+  outline: none;
+}
+
+.request-form button {
+  padding: 1rem;
+  background: var(--neon-blue);
+  color: var(--dark-bg);
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.request-form button:hover {
+  background: var(--neon-pink);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(10, 10, 10, 0.9);
+  border-top: 1px solid var(--neon-blue);
+  margin-top: 2rem;
+}
+
+.footer p {
+  color: var(--text-color);
+  font-size: 1rem;
+}

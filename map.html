@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer's Zone</title>
+    <style>
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --dark-bg: #0a0a0a;
+            --grid-color: rgba(0, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Navigation Styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-pink);
+        }
+
+        /* Hero Section */
+        .cyber-header {
+            height: 100vh;
+            background: 
+                linear-gradient(0deg, var(--dark-bg) 0%, transparent 100%),
+                linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 
+                2px 2px var(--neon-pink),
+                -2px -2px var(--neon-blue);
+            animation: glitch 1s infinite;
+            margin-bottom: 1rem;
+        }
+
+        /* Game Grid Styles */
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .game-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .game-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Requirements Section */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .requirement-box {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 2rem;
+            border: 1px solid var(--neon-blue);
+        }
+
+        /* Download Section */
+        .download {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 2px solid var(--neon-pink);
+            margin-top: 4rem;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+
+        .download-button:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--neon-blue);
+            margin-top: 4rem;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+            25% { text-shadow: -2px 2px var(--neon-blue), 2px -2px var(--neon-pink); }
+            50% { text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
+            75% { text-shadow: -2px -2px var(--neon-blue), 2px 2px var(--neon-pink); }
+            100% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue); }
+        }
+        marquee {
+            transition: all 0.5s ease-in-out;
+            padding: 15px 0;}
+
+       .game-scroll {
+             display: flex;
+             gap: 2rem;}
+        .marquee-container {
+            margin: 3rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-heading {
+            font-size: 1.5rem;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        game-marquee {
+            display: block;
+            padding: 1rem 0;
+        }
+
+        .game-scroll {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .game-card {
+            display: inline-block;
+            width: 250px;
+            margin: 0 1.5rem;
+            vertical-align: top;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            transition: transform 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--neon-pink);
+        }
+
+        .game-info {
+            padding: 1rem;
+        }
+
+        .game-title {
+            color: var(--neon-blue);
+            margin: 0.5rem 0;
+        }
+
+        .game-genre {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .game-rating {
+            color: var(--neon-pink);
+            margin-top: 0.5rem;
+        }
+        .all-time-favorites {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--neon-blue);
+        }
+
+.section-heading {
+    font-size: 2rem;
+    color: var(--neon-pink);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.favorites-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.favorites-list li {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--neon-blue);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.favorites-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px);
+    border-color: var(--neon-pink);
+}
+
+.game-rank {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--neon-blue);
+    min-width: 30px;
+    text-align: center;
+}
+
+.game-name {
+    font-size: 1.1rem;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.game-genre {
+    font-size: 0.9rem;
+    color: var(--neon-pink);
+    background: rgba(255, 0, 255, 0.1);
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+.top-performing-all-time {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--neon-blue);
+}
+
+.section-heading {
+    font-size: 2rem;
+    color: var(--neon-pink);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.performance-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.performance-list li {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--neon-blue);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.performance-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px);
+    border-color: var(--neon-pink);
+}
+
+.game-rank {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--neon-blue);
+    min-width: 30px;
+    text-align: center;
+}
+
+.game-name {
+    font-size: 1.1rem;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.game-metric {
+    font-size: 0.9rem;
+    color: var(--neon-pink);
+    background: rgba(255, 0, 255, 0.1);
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="map.html">Gaming</a></li>
+              <li><a href="movie 1.html">Movies</a></li>
+              <li><a href="tech 1.html">Tech</a></li>
+              <li><a href="forum.html">Chat Forum</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </nav>
+    </header>
+    <section class="cyber-header" id="gaming-arena">
+        <div class="glitch-text">Gamer's Zone</div><br>
+     </section>
+        <main class="container">
+            <!-- Trending Games Marquee -->
+            <div class="marquee-container">
+                <h2 class="marquee-heading">🔥 TRENDING NOW</h2>
+                <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.setAttribute('scrollamount', 0.1)" onmouseout="this.setAttribute('scrollamount', 5)" loop="-1">
+                    <div class="game-scroll">
+                        <!-- Trending Game 1 -->
+                        <div class="game-card">
+                            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+                            <div class="game-info">
+                                <h3 class="game-title">Cyberpunk 2077</h3>
+                                <p class="game-genre">RPG • Open World</p>
+                                <div class="game-rating">⭐ 4.5/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Trending Game 2 -->
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/OIP.EDJ2s10kkSD_w_xj3pK_vQHaHa?w=179&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Ghostrunner 2">
+                            <div class="game-info">
+                                <h3 class="game-title">Ghostrunner 2</h3>
+                                <p class="game-genre">Action • Platformer</p>
+                                <div class="game-rating">⭐ 4.8/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Add 8 more trending games -->
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/OIP.QqrhC1cvIBOWJ2Iqo4YMGwHaJ3?rs=1&pid=ImgDetMain" alt="Deus Ex">
+                            <div class="game-info">
+                                <h3 class="game-title">Deus Ex: Mankind Divided</h3>
+                                <p class="game-genre">Action RPG • Cyberpunk</p>
+                                <div class="game-rating">⭐ 4.6/5</div>
+                            </div>
+                        </div>
+    
+                        <div class="game-card">
+                            <img src="https://m.media-amazon.com/images/M/MV5BZmY2MzNiZWYtMTVjMS00NTEyLWJkY2YtODExMDIzZjAyMWYzXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_FMjpg_UX1000_.jpg" alt="System Shock 2">
+                            <div class="game-info">
+                                <h3 class="game-title">System Shock 2</h3>
+                                <p class="game-genre">Survival Horror • Sci-fi</p>
+                                <div class="game-rating">⭐ 4.7/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Continue adding remaining trending games... -->
+                    </div>
+                </marquee>
+            </div>
+    
+            <!-- Latest Games Marquee -->
+            <div class="marquee-container">
+                <h2 class="marquee-heading">🆕 LATEST RELEASES</h2>
+                <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.setAttribute('scrollamount', 0.5)" onmouseout="this.setAttribute('scrollamount', 5)" loop="-1">
+                    <div class="game-scroll">
+                        <!-- Latest Game 1 -->
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/R.2695df575b27970ed521d644dc3d4b1c?rik=pw86E0q%2bAzicVw&pid=ImgRaw&r=0" alt="Resident Evil Village">
+                            <div class="game-info">
+                                <h3 class="game-title">Resident Evil Village</h3>
+                                <p class="game-genre">Survival Horror</p>
+                                <div class="game-rating">⭐ 4.7/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Latest Game 2 -->
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/OIP.Ti_aXKN5kOgUCFzc4bZfSwHaKS?rs=1&pid=ImgDetMain" alt="The Last of Us Part II">
+                            <div class="game-info">
+                                <h3 class="game-title">The Last of Us Part II</h3>
+                                <p class="game-genre">Action Adventure</p>
+                                <div class="game-rating">⭐ 4.9/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Add 8 more latest games -->
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/OIP.dyTMxO8rSGLw15jdvyDYfwHaHa?rs=1&pid=ImgDetMain" alt="Tekken 8">
+                            <div class="game-info">
+                                <h3 class="game-title">Tekken 8</h3>
+                                <p class="game-genre">Fighting • Action</p>
+                                <div class="game-rating">⭐ 4.8/5</div>
+                            </div>
+                        </div>
+    
+                        <div class="game-card">
+                            <img src="https://th.bing.com/th/id/OIP.cYAgjHD-rHcAUl03BHr4vAHaEK?rs=1&pid=ImgDetMain" alt="Starfield">
+                            <div class="game-info">
+                                <h3 class="game-title">Starfield</h3>
+                                <p class="game-genre">Space RPG • Adventure</p>
+                                <div class="game-rating">⭐ 4.6/5</div>
+                            </div>
+                        </div>
+    
+                        <!-- Continue adding remaining latest games... -->
+                    </div>
+                </marquee>
+            </div>
+            <!-- Add this section below the marquee sections -->
+<section class="all-time-favorites">
+    <h2 class="section-heading">🌟 ALL-TIME FAVORITES</h2>
+    <div class="favorites-container">
+        <ul class="favorites-list">
+            <li>
+                <span class="game-rank">1</span>
+                <span class="game-name">The Legend of Zelda: Breath of the Wild</span>
+                <span class="game-genre">Action-Adventure</span>
+            </li>
+            <li>
+                <span class="game-rank">2</span>
+                <span class="game-name">The Witcher 3: Wild Hunt</span>
+                <span class="game-genre">RPG</span>
+            </li>
+            <li>
+                <span class="game-rank">3</span>
+                <span class="game-name">Red Dead Redemption 2</span>
+                <span class="game-genre">Action-Adventure</span>
+            </li>
+            <li>
+                <span class="game-rank">4</span>
+                <span class="game-name">Dark Souls III</span>
+                <span class="game-genre">Action RPG</span>
+            </li>
+            <li>
+                <span class="game-rank">5</span>
+                <span class="game-name">Portal 2</span>
+                <span class="game-genre">Puzzle-Platformer</span>
+            </li>
+            <li>
+                <span class="game-rank">6</span>
+                <span class="game-name">Mass Effect 2</span>
+                <span class="game-genre">Action RPG</span>
+            </li>
+            <li>
+                <span class="game-rank">7</span>
+                <span class="game-name">Half-Life 2</span>
+                <span class="game-genre">FPS</span>
+            </li>
+            <li>
+                <span class="game-rank">8</span>
+                <span class="game-name">Elden Ring</span>
+                <span class="game-genre">Action RPG</span>
+            </li>
+            <li>
+                <span class="game-rank">9</span>
+                <span class="game-name">God of War (2018)</span>
+                <span class="game-genre">Action-Adventure</span>
+            </li>
+            <li>
+                <span class="game-rank">10</span>
+                <span class="game-name">The Last of Us</span>
+                <span class="game-genre">Action-Adventure</span>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Add this section below the marquee sections -->
+<section class="top-performing-all-time">
+    <h2 class="section-heading">🏆 TOP PERFORMING GAMES OF ALL TIME</h2>
+    <div class="performance-container">
+        <ul class="performance-list">
+            <li>
+                <span class="game-rank">1</span>
+                <span class="game-name">Minecraft</span>
+                <span class="game-metric">⭐ 9/10 • 300M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">2</span>
+                <span class="game-name">Tetris</span>
+                <span class="game-metric">⭐ 8.5/10 • 520M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">3</span>
+                <span class="game-name">Grand Theft Auto V</span>
+                <span class="game-metric">⭐ 9.5/10 • 185M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">4</span>
+                <span class="game-name">The Legend of Zelda: Breath of the Wild</span>
+                <span class="game-metric">⭐ 9.7/10 • 30M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">5</span>
+                <span class="game-name">The Witcher 3: Wild Hunt</span>
+                <span class="game-metric">⭐ 9.3/10 • 50M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">6</span>
+                <span class="game-name">Super Mario Bros.</span>
+                <span class="game-metric">⭐ 9/10 • 58M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">7</span>
+                <span class="game-name">Pokémon Red/Green/Blue</span>
+                <span class="game-metric">⭐ 8.8/10 • 47M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">8</span>
+                <span class="game-name">Dark Souls</span>
+                <span class="game-metric">⭐ 9/10 • 27M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">9</span>
+                <span class="game-name">The Elder Scrolls V: Skyrim</span>
+                <span class="game-metric">⭐ 9.2/10 • 60M+ Sales</span>
+            </li>
+            <li>
+                <span class="game-rank">10</span>
+                <span class="game-name">World of Warcraft</span>
+                <span class="game-metric">⭐ 9/10 • 100M+ Subscribers</span>
+            </li>
+        </ul>
+    </div>
+</section>
+        <section class="requirements" id="requirements">
+            <h2>⚙️ System Requirements for all top game</h2>
+            <div class="requirements-grid">
+                <div class="requirement-box">
+                    <h3>Minimum Specs</h3>
+                    <ul>
+                        <li>OS: Windows 10/11</li>
+                        <li>CPU: Intel i5-4460</li>
+                        <li>GPU: GTX 960</li>
+                        <li>RAM: 8GB</li>
+                        <li>Storage: 50GB</li>
+                    </ul>
+                </div>
+                <div class="requirement-box">
+                    <h3>Recommended Specs</h3>
+                    <ul>
+                        <li>OS: Windows 11</li>
+                        <li>CPU: i7-8700K</li>
+                        <li>GPU: RTX 2070</li>
+                        <li>RAM: 16GB</li>
+                        <li>Storage: 50GB SSD</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="download" id="download">
+        <h2>Ready to Game?</h2>
+        <p>Join our cyber community and get instant access to the latest games, exclusive content, and more!</p>
+        <a href="#" class="download-button">Download our app (v1.2.3)</a>
+        <p>Optimized for next-gen experiences</p>
+    </section>
+
+    <footer>
+        <p>© 2025 reviewer - All rights reserved</p>
+    </footer>
+</body>
+</html>
