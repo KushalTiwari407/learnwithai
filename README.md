@@ -1,0 +1,1 @@
+this project which was given by our professor as a intercollege best website presenter and also the ideathon (a program where a prototype of a idea is build by ai). we won second place claiming 2000 rupees.
